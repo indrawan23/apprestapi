@@ -56,3 +56,26 @@ exports.tambahAgenda = function (req, res) {
     }
   );
 };
+
+// mengubah agenda berdasarkan ID
+exports.ubahAgenda = function (req, res) {
+  let id = req.body.id_agenda;
+  let tanggal = req.body.tanggal;
+  let agenda = req.body.agenda;
+  let tempat = req.body.tempat;
+  let yang_menghadiri = req.body.yang_menghadiri;
+  let dokumentasi = req.body.dokumentasi;
+  let user = req.body.user;
+
+  connection.query(
+    "UPDATE agenda SET tanggal=?, agenda=?, tempat=?, yang_menghadiri=?, dokumentasi=?, user=? WHERE id_agenda=?",
+    [tanggal, agenda, tempat, yang_menghadiri, dokumentasi, user, id],
+    function (error, rows, fields) {
+      if (error) {
+        console.log(error);
+      } else {
+        response.ok("Agenda berhasil diubah!", res);
+      }
+    }
+  );
+};
