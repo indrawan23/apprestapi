@@ -79,3 +79,19 @@ exports.ubahAgenda = function (req, res) {
     }
   );
 };
+
+// Delete agenda
+exports.hapusAgenda = function (req, res) {
+  let id = req.body.id_agenda;
+  connection.query(
+    "DELETE FROM agenda WHERE id_agenda=?",
+    [id],
+    function (error, rows, fields) {
+      if (error) {
+        console.log(error);
+      } else {
+        response.ok("Agenda berhasil dihapus..", res);
+      }
+    }
+  );
+};
