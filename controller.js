@@ -34,3 +34,25 @@ exports.tampilAgendaById = function (req, res) {
     }
   );
 };
+
+// menambah data agenda
+exports.tambahAgenda = function (req, res) {
+  let tanggal = req.body.tanggal;
+  let agenda = req.body.agenda;
+  let tempat = req.body.tempat;
+  let yang_menghadiri = req.body.yang_menghadiri;
+  let dokumentasi = req.body.dokumentasi;
+  let user = req.body.user;
+
+  connection.query(
+    "INSERT INTO agenda (tanggal, agenda, tempat, yang_menghadiri, dokumentasi, user) VALUES(?,?,?,?,?,?)",
+    [tanggal, agenda, tempat, yang_menghadiri, dokumentasi, user],
+    function (error, rows, fields) {
+      if (error) {
+        console.log(error);
+      } else {
+        response.ok("Berhasil Menambahkan Agenda!", res);
+      }
+    }
+  );
+};
